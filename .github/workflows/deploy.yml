@@ -40,7 +40,7 @@ jobs:
           host: ${{ secrets.WALLET_SSH_HOST }}
           username: ${{ secrets.WALLET_SSH_USERNAME }}
           key: ${{ secrets.WALLET_SSH_KEY }}
-          scripts: |
+          script: |
             sudo docker pull keshavvakul/wallet-nextjs:latest
             sudo docker stop web-app || true
             sudo docker rm web-app || true
