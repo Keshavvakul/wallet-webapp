@@ -29,8 +29,8 @@ interface Credentials {
 export const authOptions: AuthOptions = {
   providers: [
     GitHubProvider({
-      clientId: process.env.GITHUB_ID || "",
-      clientSecret: process.env.GITHUB_SECRET || "",
+      clientId: process.env.WALLET_GITHUB_ID || "",
+      clientSecret: process.env.WALLET_GITHUB_SECRET || "",
       
     }),
     GoogleProvider({
