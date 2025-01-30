@@ -8,6 +8,7 @@ on:
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
+
     steps:
       # Step 1: Check out the repository
       - name: Check Out Repo
@@ -18,7 +19,7 @@ jobs:
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKER_USERNAME }} 
-          password: ${{ secrets.DOCKER_PASSWORD }} 
+          password: ${{ secrets.DOCKER_PASSWORD }}
 
       # Step 3: Build and Push Docker Image
       - name: Build and Push Docker image
@@ -33,10 +34,10 @@ jobs:
       - name: Verify Pushed Image
         run: docker pull keshavvakul/wallet-nextjs:latest
 
-      # Step 5: Deploy to ec2
+      # Step 5: Deploy to EC2
       - name: Deploy to EC2
         uses: appleboy/ssh-action@master
-        with: 
+        with:
           host: ${{ secrets.WALLET_SSH_HOST }}
           username: ${{ secrets.WALLET_SSH_USERNAME }}
           key: ${{ secrets.WALLET_SSH_KEY }}
@@ -44,4 +45,13 @@ jobs:
             sudo docker pull keshavvakul/wallet-nextjs:latest
             sudo docker stop web-app || true
             sudo docker rm web-app || true
-            sudo docker run -d --name web-app -p 3005:3000 keshavvakul/wallet-nextjs:latest
+            sudo docker run -d --name web-app -p 3005:3000 \
+              -e NEXTAUTH_SECRET="${{ secrets.NEXTAUTH_SECRET }}" \
+              -e NEXTAUTH_URL="http://localhost:3005" \
+              -e WALLET_GITHUB_ID="${{ secrets.WALLET_GITHUB_ID }}" \
+              -e WALLET_GITHUB_SECRET="${{ secrets.WALLET_GITHUB_SECRET }}" \
+              -e GOOGLE_CLIENT_ID="${{ secrets.GOOGLE_CLIENT_ID }}" \
+              -e GOOGLE_CLIENT_SECRET="${{ secrets.GOOGLE_CLIENT_SECRET }}" \
+              -e RESEND_API_KEY="${{ secrets.RESEND_API_KEY }}" \
+              -e DATABASE_URL="${{ secrets.DATABASE_URL }}" \
+              keshavvakul/wallet-nextjs:latest
