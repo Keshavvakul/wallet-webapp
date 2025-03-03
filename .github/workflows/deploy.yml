@@ -45,7 +45,7 @@ jobs:
             sudo docker pull keshavvakul/wallet-nextjs:latest
             sudo docker stop web-app || true
             sudo docker rm web-app || true
-            sudo docker run -d --name web-app -p 3005:3000 \
+            sudo docker run -d --restart unless-stopped --name web-app -p 3005:3000 \
               -e NEXTAUTH_SECRET="${{ secrets.NEXTAUTH_SECRET }}" \
               -e NEXTAUTH_URL="${{ secrets.NEXTAUTH_URL }}" \
               -e WALLET_GITHUB_ID="${{ secrets.WALLET_GITHUB_ID }}" \
