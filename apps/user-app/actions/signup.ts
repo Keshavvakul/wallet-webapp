@@ -44,14 +44,16 @@ export const signup = async (values: z.infer<typeof RegisterSchema>) => {
   })
 
   // Send Varification token email
-  // const verificationToken = await generateVerificationToken(email);
-  // await sendVerificationEmail(verificationToken.email, verificationToken.token);
+  const verificationToken = await generateVerificationToken(email);
+  console.log(verificationToken);
+  const emailSent = await sendVerificationEmail(verificationToken.email, verificationToken.token);
+  console.log(emailSent);
 
 
   return { success: "Confirmation email sent" };
   }
    catch (e) {
-    console.error(e);
+    console.log(e);
     return {error: "Something went wrong"};
   }
 }
