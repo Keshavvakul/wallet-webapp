@@ -4,7 +4,7 @@ This is an official starter Turborepo.
 
 ## Demo
 
-![Demo GIF](public/demo-gif.gif)
+![Demo GIF](public/demo.gif)
 **[Click here for the full video with audio](https://drive.google.com/file/d/1gFQMRVrj74QEcmu6QHXnFjFgm7iDsXO2/view?usp=sharing)**
 
 ## Using this example
