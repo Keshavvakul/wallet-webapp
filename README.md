@@ -2,6 +2,12 @@
 
 This is an official starter Turborepo.
 
+## Demo
+
+![Demo GIF](public/demo.gif)
+<img src="public/demo.gif" alt="Demo GIF" width="500"/>
+**[Click here for the full video with audio](https://drive.google.com/file/d/1gFQMRVrj74QEcmu6QHXnFjFgm7iDsXO2/view?usp=sharing)**
+
 ## Using this example
 
 Run the following command:
